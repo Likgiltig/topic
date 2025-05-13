@@ -133,9 +133,9 @@ python topic_img.py output.png vacation_photo.jpg decrypt
 ## Important Notes
 
 
--   **Data Loss Warning:** **Crucially, if you forget the password used with `topic_pw.py` or lose/modify the original image used with `topic_img.py`, the hidden and encrypted data will be permanently unrecoverable.** Store your passwords securely and keep a safe, unmodified copy of the original image if using the image-based method.
+-   **Data Loss Warning:** **If you forget the password used with `topic_pw.py` or lose/modify the original image used with `topic_img.py`, the hidden and encrypted data will be permanently unrecoverable.** Store your passwords securely and keep a safe, unmodified copy of the original image if using the image-based method.
     
--   **Image Format:** The scripts work best with lossless image formats like PNG. Using lossy formats like JPG after embedding can corrupt the hidden data. The scripts convert images to RGBA PNG internally for embedding.
+-   **Image Format:** The scripts only works on PNG files since it is lossless, if the image file only has 3 color channels it will convert it to RGBA PNG before embedding to utilize the alpha channel.
     
 -   **Image Capacity:** The amount of data you can hide depends on the size of the cover image. Hiding large files requires large images. The scripts include checks for available space.
  
