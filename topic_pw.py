@@ -31,7 +31,7 @@ def generate_key_from_password(password: str, salt: bytes, verbose: bool = True)
     try:
         kdf = PBKDF2HMAC(
             algorithm=hashes.SHA256(),
-            length=32,  # Fernet key_size
+            length=32,
             salt=salt,
             iterations=PBKDF2_ITERATIONS,
             backend=default_backend()
@@ -131,7 +131,7 @@ def extract_bits_from_image_generator(stego_image_filepath: str, verbose: bool =
     for y, x in itertools.product(range(height), range(width)):
         pixel = img_data[x, y]
         for i in range(CHANNELS_TO_USE):
-            yield str(pixel[i] & 1) # Extract LSB
+            yield str(pixel[i] & 1)
 
 def extract_specific_bits(bit_generator: Generator[str, None, None], num_bits: int) -> str:
     """Extracts a specific number of bits from the bit generator."""
@@ -251,7 +251,6 @@ def decrypt_action(stego_image_filepath: str, verbose: bool = True) -> None:
     except Exception as e: # Catch-all for other unexpected errors during extraction
         print(f"[ERROR] An unexpected error occurred during data extraction: {e}")
         sys.exit(1)
-
     # 6. Decrypt Data
     print_verbose("Decrypting data...", verbose)
     if not encrypted_bytes:
@@ -264,7 +263,6 @@ def decrypt_action(stego_image_filepath: str, verbose: bool = True) -> None:
         except Exception as e: # Catches InvalidToken from Fernet, etc.
             print(f"[ERROR] Decryption failed. Incorrect password or corrupted data. Error: {e}")
             sys.exit(1)
-
     # 7. Save Decrypted Data
     output_filepath = decrypted_filename
     print_verbose(f"Saving decrypted data to '{output_filepath}'...", verbose)
